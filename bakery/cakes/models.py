@@ -12,3 +12,5 @@ class Order(models.Model):
 class Cake(models.Model):
     name = models.CharField(max_length=50, null=False, blank=False)
     image = models.ImageField(upload_to='media/')
+    description = models.TextField(max_length=70, null=False, blank=False)
+    price = models.IntegerField(null=False, blank=False)

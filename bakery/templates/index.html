@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,21 +15,21 @@
 <meta name="description" content="">
 <meta name="author" content="">	
 <!-- bootstrap css -->
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css'%}">
 <!-- style css -->
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css'%}">
 <!-- Responsive-->
-<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="{% static "css/responsive.css"%}">
 <!-- fevicon -->
-<link rel="icon" href="images/fevicon.png" type="image/gif" />
+<link rel="icon" href="{% static 'images/fevicon.png'%}" type="image/gif" />
 <!-- Scrollbar Custom CSS -->
-<link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+<link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css'%}">
 <!-- Tweaks for older IEs-->
-<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<link rel="stylesheet" href="{% static 'https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css'%}">
 <!-- owl stylesheets --> 
-<link rel="stylesheet" href="css/owl.carousel.min.css">
-<link rel="stylesheet" href="css/owl.theme.default.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+<link rel="stylesheet" href="{% static 'css/owl.carousel.min.css'%}">
+<link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css'%}">
+<link rel="stylesheet" href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css'%}" media="screen">
 
 </head>
 <body>
@@ -51,11 +52,11 @@
                         <div class="limit-box">
                            <nav class="main-menu">
                               <ul class="menu-area-main">
-                                 <li class="active"><a href="#home">Home</a></li>
-                                 <li><a href="#about">About</a></li>
-                                 <li><a href="#products">products</a></li>
-                                 <li><a href="#gallery">gallery</a></li>
-                                 <li><a href="#contact">Contact Us</a></li>
+                                 <li class="active"><a href="#home">Главная</a></li>
+                                 <li><a href="#about">О магазине</a></li>
+                                 <li><a href="#products">Каталог</a></li>
+                                 <li><a href="#gallery">Новинки</a></li>
+                                 <li><a href="#contact">Контакты</a></li>
                               </ul>
                            </nav>
                         </div>
@@ -148,38 +149,19 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12">
-					<h1 class="product_text"><strong><span class="den">Den</span>Products</strong></h1>
+					<h1 class="product_text"><strong><span class="den">Наши</span>Тортики</strong></h1>
 				</div>
 			</div>
 		    <div class="product_section_2 images">
 			    <div class="row">
+					{% for cake in cakes %}
 			    	<div class="col-sm-4">
-			    		<div class="images"><img src="images/about-img1.png" style="max-width: 100%; width: 100%;"></div>
-			    		<h2 class="den_text croissants"><a href="#">Croissants Breakfast</a></h2>
+						<div class="images"><img src="{{ cake.image.url }}" style="max-width: 100%; width: 100%;"></div>
+			    		<h2 class="den_text croissants"><a href="#">{{ cake.name }}</a></h2>
+						<h2 class="den_text croissants"><a href="#">{{ cake.description }}</a></h2>
+						<h2 class="den_text croissants"><a href="#">{{ cake.price }} руб.</a></h2>
 			    	</div>
-			    	<div class="col-sm-4">
-			    		<div class="images"><img src="images/about-img2.png" style="max-width: 100%; width: 100%;"></div>
-			    		<h2 class="den_text"><a href="#">Roll Cake</a></h2>
-			    	</div>
-			    	<div class="col-sm-4">
-			    		<div class="images"><img src="images/about-img3.png" style="max-width: 100%; width: 100%;"></div>
-			    		<h2 class="den_text"><a href="#">BreadFrench Toast</a></h2>
-			    	</div>
-			    
-		    
-		   
-			    	<div class="col-sm-4">
-			    		<div class="images"><img src="images/about-img4.png" style="max-width: 100%; width: 100%;"></div>
-			    		<h2 class="den_text"><a href="#">Cup Cake</a></h2>
-			    	</div>
-			    	<div class="col-sm-4">
-			    		<div class="images"><img src="images/about-img5.png" style="max-width: 100%; width: 100%;"></div>
-			    		<h2 class="den_text"><a href="#">Donut</a></h2>
-			    	</div>
-			    	<div class="col-sm-4">
-			    		<div class="images"><img src="images/about-img6.png" style="max-width: 100%; width: 100%;"></div>
-			    		<h2 class="den_text"><a href="#">Chocolate Cup Cake</a></h2>
-			    	</div>
+					{% endfor %}
 			    </div>
 		    </div>
 		</div>

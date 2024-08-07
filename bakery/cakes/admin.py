@@ -20,6 +20,8 @@ class CakeAdmin(admin.ModelAdmin):
     list_display = [
         'name',
         'image',
+        'description',
+        'price',
     ]
     search_fields = [
         'name',

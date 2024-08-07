@@ -1,6 +1,9 @@
 from django.shortcuts import render
+from .models import Cake
 
 
 def index(request):
     template = 'index.html'
-    return render(request, template)
+    cakes = Cake.objects.all()
+    context = {'cakes': cakes}
+    return render(request, template, context)
