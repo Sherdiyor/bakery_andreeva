@@ -8,7 +8,10 @@ SECRET_KEY = 'django-insecure-=zy14l4f5^n+ki_9-vfi+)$d#$#)noaqtzhpi=6^b^a^z!y*s%
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+CORS_ALLOW_ALL_ORIGINS = True
+
+ALLOWED_HOSTS = ['*']
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -19,7 +22,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cakes',
     'django_forms_bootstrap',
-    'bootstrap4'
+    'bootstrap4',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -30,6 +34,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'bakery.urls'
@@ -54,14 +59,21 @@ TEMPLATES = [
 WSGI_APPLICATION = 'bakery.wsgi.application'
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': os.getenv('ENGINE', default='django.db.backends.postgresql'),
+#         'NAME': os.getenv('NAME', default='mydatabase'),
+#         'USER': os.getenv('USER', default='myuser'),
+#         'PASSWORD': os.getenv('PASSWORD', default='mypassword'),
+#         'HOST': os.getenv('HOST', default='db'),
+#         'PORT': os.getenv('PORT', default=5432),
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mydatabase',
-        'USER': 'myuser',
-        'PASSWORD': 'mypassword',
-        'HOST': 'db',
-        'PORT': 5432,
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

@@ -8,16 +8,20 @@ services:
       - POSTGRES_USER=myuser
       - POSTGRES_PASSWORD=mypassword
     volumes:
-      - ./pgdata:/var/lib/postgresql/data
+      - pg-data:/var/lib/postgresql/data
 
   web:
     build:
       context: .
       dockerfile: ./bakery/Dockerfile
-    command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-      - .:/app
+    env_file:
+      - ./bakery/.env
+    command: |
+      bash -c "gunicorn bakery.wsgi:application --bind 0:8000"
     ports:
       - "8000:8000"
     depends_on:
       - db
+
+volumes:
+  pg-data:

@@ -1,397 +1,237 @@
-{% load static %}
-{% load bootstrap_tags %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-<!-- basic -->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- mobile metas -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="viewport" content="initial-scale=1, maximum-scale=1">
-<!-- site metas -->
-<title>Den</title>
-<meta name="keywords" content="">
-<meta name="description" content="">
-<meta name="author" content="">	
-<!-- bootstrap css -->
-<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css'%}">
-<!-- style css -->
-<link rel="stylesheet" type="text/css" href="{% static 'css/style.css'%}">
-<!-- Responsive-->
-<link rel="stylesheet" href="{% static "css/responsive.css"%}">
-<!-- fevicon -->
-<link rel="icon" href="{% static 'images/fevicon.png'%}" type="image/gif" />
-<!-- Scrollbar Custom CSS -->
-<link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css'%}">
-<!-- Tweaks for older IEs-->
-<link rel="stylesheet" href="{% static 'https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css'%}">
-<!-- owl stylesheets --> 
-<link rel="stylesheet" href="{% static 'css/owl.carousel.min.css'%}">
-<link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css'%}">
-<link rel="stylesheet" href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css'%}" media="screen">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кондитерская</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            background-image: url('https://example.com/background.jpg'); /* Замените на URL вашего фона */
+            background-size: cover;
+            background-position: center;
+        }
+        header {
+            background: rgba(255, 107, 107, 0.8);
+            padding: 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+        }
+        header h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 3em;
+            margin: 0;
+        }
+        section {
+            padding: 60px 20px;
+            max-width: 800px;
+            margin: auto;
+            position: relative;
+            overflow: hidden;
+            background-color: rgba(255, 255, 255, 0.9); /* Полупрозрачный фон для секций */
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            color: #333;
+        }
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #ff6b6b;
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin: 15px;
+            padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        }
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold; /* Сделаем текст метки жирным */
+        }
+        input, textarea {
+            width: calc(100% - 20px); /* Учитываем внутренние отступы */
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            font-family: 'Roboto', sans-serif; /* Стандартизируем шрифт */
+        }
+        input:focus, textarea:focus {
+            border-color: #ff6b6b;
+            outline: none;
+            box-shadow: 0 0 5px rgba(255,107,107,0.5);
+        }
+        button {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+        button:hover {
+            background-color: #ff3d3d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        footer {
+            background-color: #ff6b6b;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+        footer a {
+            color: white;
+        }
+    </style>
 </head>
 <body>
-	<header>
-		<div class="layout_padding banner_section_start">
-         <!-- header inner -->
-         <div class="header">
-            <div class="container">
-               <div class="row">
-                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
-                     <div class="full">
-                        <div class="center-desk">
-                           <div class="logo"><a href="#home"><img src="images/logo.png" style="max-width: 100%;"></a> 
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
-                     <div class="menu-area">
-                        <div class="limit-box">
-                           <nav class="main-menu">
-                              <ul class="menu-area-main">
-                                 <li class="active"><a href="#home">Главная</a></li>
-                                 <li><a href="#about">О магазине</a></li>
-                                 <li><a href="#products">Каталог</a></li>
-                                 <li><a href="#gallery">Новинки</a></li>
-                                 <li><a href="#contact">Контакты</a></li>
-                              </ul>
-                           </nav>
-                        </div>
-                     </div>
-                 </div>
-               </div>
-            </div>
-         </div>
-         <!-- end header inner -->		
-	<!-- banner start-->
-	<div class="layout_padding banner_section">
-		<div class="container">
-           <div id="main_slider" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <div class="row ">
-				<div class="col-md-6 taital">
-					<h1 class="taital">Quality<strong class="banner_taital">Products with breads sweet Den</strong></h1>
-                     <p class="lorem_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim</p>
-				</div>
-				<div class="col-md-6">
-					<div class="banner-image"><img src="images/banner-image.png" style="max-width: 100%;"></div>
-				</div>
-				<div class="banner_bt">
-				<button class="bt_main"><a href="#">Read More</a></button>
-				</div>
-			</div>
-    </div>
-    <div class="carousel-item">
-      <div class="row ">
-				<div class="col-md-6 taital">
-					<h1>Quality<strong class="banner_taital">Products with breads sweet Den</strong></h1>
-                     <p class="lorem_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim</p>
-				</div>
-				<div class="col-md-6">
-					<div class="banner-image"><img src="images/banner-image.png" style="max-width: 100%;"></div>
-				</div>
-				<div class="banner_bt">
-				<button class="bt_main"><a href="#">Read More</a></button>
-				</div>
-			</div>
-    </div>
-    <div class="carousel-item">
-     <div class="row ">
-				<div class="col-md-6 taital">
-					<h1>Quality<strong class="banner_taital">Products with breads sweet Den</strong></h1>
-                     <p class="lorem_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim</p>
-				</div>
-				<div class="col-md-6">
-					<div class="banner-image"><img src="images/banner-image.png" style="max-width: 100%;"></div>
-				</div>
-				<div class="banner_bt">
-				<button class="bt_main"><a href="#">Read More</a></button>
-				</div>
-			</div>
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#main_slider" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"><i class="fa fa-angle-left"></i></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#main_slider" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"><i class="fa fa-angle-right"></i></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-			
-		</div>
-	</div>
-    </div>
-	</header>
-	<!-- banner end-->
-	<!-- about start-->
-	<div id="about" class="layout_padding about_section">
-		<div class="container">
-			<div class="row">
-		        <div class="col-md-6">
-		        	<div><img src="images/cupcake-img.png" style="max-width: 100%;"></div>
-		        </div>
-		        <div class="col-md-6">
-		        	<h1 class="about_text"><strong>About Den <span class="color">Shop</span></strong></h1>
-		        	<p class="about_taital">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim ve niam, quis nostrud exercitationconsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
-		        	<button class="read_more"><a href="#">Read More</a></button>
-		        </div>
-			</div>
-		</div>
-	</div>
-	<!-- product start-->
-	<div id="products" class="layout_padding product_section ">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12">
-					<h1 class="product_text"><strong><span class="den">Наши</span>Тортики</strong></h1>
-				</div>
-			</div>
-		    <div class="product_section_2 images">
-			    <div class="row">
-					{% for cake in cakes %}
-			    	<div class="col-sm-4">
-						<div class="images"><img src="{{ cake.image.url }}" style="max-width: 100%; width: 100%;"></div>
-			    		<h2 class="den_text croissants"><a href="#">{{ cake.name }}</a></h2>
-						<h2 class="den_text croissants"><a href="#">{{ cake.description }}</a></h2>
-						<h2 class="den_text croissants"><a href="#">{{ cake.price }} руб.</a></h2>
-			    	</div>
-					{% endfor %}
-			    </div>
-		    </div>
-		</div>
-	</div>
-	<!-- product end-->
-	<!-- Gallery start-->
-	<div id="gallery" class="layout_padding2 gallery_section">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-sm-12">
-					<div class="gallery_main">
-					    <h1 class="gallery_taital"><strong><span class="our_text">Our</span> Gallery</strong></h1>
-					</div>
-				</div>
-				<div class="col-sm-12 gallery_maain">
-					<div class="row">
-						<div class="col-sm-3 padding_0">
-							<div class="gallery_blog">
-								<img class="img-responive" src="images/gallery-img1.png">
-								<div class="overlay">
-									<h2>Breakfast Breads</h2>
-								</div>
-							</div>
-						</div>
-                        <div class="col-sm-3 padding_0">
-							<div class="gallery_blog">
-								<img class="img-responive" src="images/gallery-img2.png">
-								<div class="overlay">
-									<h2>Breakfast Breads</h2>
-								</div>
-							</div>
-                        </div>
-                        <div class="col-sm-3 padding_0">
-							<div class="gallery_blog">
-								<img class="img-responive" src="images/gallery-img3.png">
-								<div class="overlay">
-									<h2>Breakfast Breads</h2>
-								</div>
-							</div>
-                        </div>
-                        <div class="col-sm-3 padding_0">
-							<div class="gallery_blog">
-								<img class="img-responive" src="images/gallery-img4.png">
-								<div class="overlay">
-									<h2>Breakfast Breads</h2>
-								</div>
-							</div>
-                        </div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end Gallery-->
-	<!-- Touch start-->
-	<div class="layout_padding gallery_section">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12">
-					<div class="gallery_main">
-					    <h1 class="gallery_taital"><strong><span class="our_text">Get in</span>Touch</strong></h1>
-					</div>
-				</div>
-			</div>
-			<div class="touch_main">
-				<div class="row">
-					<div class="col-md-6">
-                    <div class="input_main">
-                       <div class="container">
-						<form method="post">
-							{% csrf_token %}
-							{{ form|as_bootstrap }}
-							{% comment %} <input type="submit" value="Submit"> {% endcomment %}
-						</div> 
-                    </div>
-					<div class="send_btn">
-						<input type="submit" class="main_bt" value="Submit">
-						{% comment %} <button type="submit" class="main_bt"><a href="#">SEND</a></button>                   {% endcomment %}
-					 </div>
-				</form> 
-			    </div>
-					<div class="col-md-6">
-						<div class="images">
-							<img src="images/bread-img.png" style="max-width: 100%;">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>	
-	</div>	
-	<div class="map_section">
-		<div class="row">
-			<div class="col-sm-12">
-	
-                     <div id="map">
-                     </div>
-                   </div>
 
-		</div>
-	</div>
-	<!-- Touch end-->
-	<!-- contact start-->
-    <div id="contact" class="contact_section">
-    	<div class="container">	
-    	<div class="contact-taital">
-    		<div class="row">
-    			<div class="col-sm-12">
-    				<h1 class="contact_text"><strong>Contact Us</strong></h1>
-    			</div>
-    		</div>
-    	</div>
-    		<div class="row">	
-    			<div class="col-sm-6 col-md-6 col-lg-3">
-    				<h2 class="adderess_text">Adderess</h2>
-    				<div class="image-icon"><img src="images/map-icon.png"><span class="email_text">Gb road 123 london Uk </span></div>
-    				<div class="image-icon"><img src="images/phone-icon.png"><span class="email_text">(+71) 56982424536</span></div>
-    				<div class="image-icon"><img src="images/email-icon.png"><span class="email_text">bacerim@gmail.com</span></div>
-    			</div>
-    			<div class="col-sm-6 col-md-6 col-lg-3">
-    				<h2 class="adderess_text">Useful Links</h2>
-    				<div class="image-icon"><img src="images/bulit-icon.png"><span class="email_text">Bacerim Dictionary</span></div>
-    				<div class="image-icon"><img src="images/bulit-icon.png"><span class="email_text">Help Links</span></div>
-    				<div class="image-icon"><img src="images/bulit-icon.png"><span class="email_text">bacerim Attitudes</span></div>
-    				<div class="image-icon"><img src="images/bulit-icon.png"><span class="email_text">Call a Cutumer</span></div>
-    				<div class="image-icon"><img src="images/bulit-icon.png"><span class="email_text">Help a Bacerim</span></div>
-    			</div>
-    			<div class="col-sm-6 col-md-6 col-lg-3">
-    				<h2 class="adderess_text">Overview</h2>
-    				<div class="image-icon"><img src="images/bulit-icon.png"><span class="email_text">Bacerim Dictionary</span></div>
-    				<div class="image-icon"><img src="images/bulit-icon.png"><span class="email_text">Help Links</span></div>
-    				<div class="image-icon"><img src="images/bulit-icon.png"><span class="email_text">bacerim Attitudes</span></div>
-    				<div class="social_icon">
-    					<ul>
-    						<li><a href="#"><img src="images/fb-icon.png"></a></li>
-    						<li><a href="#"><img src="images/twitter-icon.png"></a></li>
-    						<li><a href="#"><img src="images/google-icon.png"></a></li>
-    						<li><a href="#"><img src="images/linkedin-icon.png"></a></li>
-    					</ul>
-    				</div>
-    			</div>
-    			<div class="col-sm-6 col-md-6 col-lg-3">
-    				<h2 class="adderess_text">Instagram</h2>
-    				<div class="row">
-    					<div class="col-md-6">
-    						<div class="footer-img"><img src="images/footer-img1.png" style="width: 100%;"></div>
-    					</div>
-    					<div class="col-md-6">
-    						<div class="footer-img"><img src="images/footer-img2.png" style="width: 100%;"></div>
-    					</div>
-    				</div>
-    				<div class="row">
-    					<div class="col-md-6">
-    						<div class="footer-img"><img src="images/footer-img2.png" style="width: 100%;"></div>
-    					</div>
-    					<div class="col-md-6">
-    						<div class="footer-img"><img src="images/footer-img3.png" style="width: 100%;"></div>
-    					</div>
-    				</div>
-    			</div>
-    		</div>
-    	</div>
-    </div>
-	<!-- contact end-->
-	<!-- copyright start-->
-    <div class="copyright_section">
-    	<div class="container">
-    		<div class="row">
-    			<div class="col-sm-12">
-    				<p class="copyright_taital">2019 All Rights Reserved. <a href="https://html.design">Free html  Templates</p>
-    			</div>
-    		</div>
-    	</div>
-    </div>
+<header>
+    <h1>Добро пожаловать в нашу кондитерскую!</h1>
+</header>
 
+<section id="about">
+    <h2>О нас</h2>
+    <p>Мы предлагаем широкий ассортимент вкусных десертов, пригот
+овленных с любовью и заботой. Попробуйте наши новинки и не упустите возможность заказать свои любимые сладости!</p>
+</section>
 
-	<!-- copyright end-->
+<section id="new-products">
+    <h2>Новинки</h2>
+    <div class="grid" id="new-products-grid"></div>
+</section>
 
-    <!-- Javascript files-->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-      <script src="js/jquery-3.0.0.min.js"></script>
-      <script src="js/plugin.js"></script>
-      <!-- sidebar -->
-      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="js/custom.js"></script>
-      <!-- javascript --> 
-      <script src="js/owl.carousel.js"></script>
-      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-      <script>
-      $(document).ready(function(){
-      $(".fancybox").fancybox({
-         openEffect: "none",
-         closeEffect: "none"
-         });
-         
-         $(".zoom").hover(function(){
-         
-         $(this).addClass('transition');
-         }, function(){
-         
-         $(this).removeClass('transition');
-         });
-         });
-         </script> 
+<section id="catalog">
+    <h2>Каталог товаров</h2>
+    <div class="grid" id="catalog-grid"></div>
+    <button id="load-more">Загрузить еще</button>
+</section>
 
-         <script>
-      // This example adds a marker to indicate the position of Bondi Beach in Sydney,
-      // Australia.
-      function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 11,
-          center: {lat: 40.645037, lng: -73.880224},
-          });
+<section id="order-form">
+    <h2>Форма заказа</h2>
+    <form id="form">
+        <div class="form-group">
+            <label for="name">Имя:</label>
+            <input type="text" id="name" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Номер телефона:</label>
+            <input type="tel" id="phone" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Описание заказа:</label>
+            <textarea id="description" rows="4"></textarea>
+        </div>
+        <button type="submit">Отправить заказ</button>
+    </form>
+</section>
 
-        var image = 'images/location_point.png';
-          var beachMarker = new google.maps.Marker({
-             position: {lat: 40.645037, lng: -73.880224},
-             map: map,
-             icon: image
-          });
-        }
-        </script>
-        <!-- google map js -->
-          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8eaHt9Dh5H57Zh0xVTqxVdBFCvFMqFjQ&callback=initMap"></script>
-        <!-- end google map js -->
+<footer>
+    <p>Контакты: Телефон - +7 (123) 456-78-90</p>
+    <p><a href="#">Telegram</a> | <a href="#">Instagram</a></p>
+    <p>Адрес: г. Москва, ул. Примерная, д. 1</p>
+</footer>
 
+<script>
+    async function fetchProducts(url, elementId) {
+        const response = await fetch(url);
+        const products = await response.json();
+        
+        const grid = document.getElementById(elementId);
+        products.forEach(product => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <h3>${product.name}</h3>
+                <p>Вес: ${product.weight} г</p>
+                <p>Цена: ${product.price} ₽</p>
+                <p>${product.description}</p>
+                <img src="${product.image}" alt="${product.name}" style="width:100%; border-radius:8px; margin-top:10px;">
+            `;
+            grid.appendChild(card);
+        });
+    }
 
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchProducts('/api/hots', 'new-products-grid');
+        
+        let catalogPage = 0;
+        const loadCatalog = async () => {
+            const response = await fetch(`/api/catalog?page=${catalogPage}`);
+            const products = await response.json();
+            
+            const grid = document.getElementById('catalog-grid');
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <h3>${product.name}</h3>
+                    <p>Вес: ${product.weight} г</p>
+                    <p>Цена: ${product.price} ₽</p>
+                    <p>${product.description}</p>
+                    <img src="${product.image}" alt="${product.name}" style="width:100%; border-radius:8px; margin-top:10px;">
+                `;
+                grid.appendChild(card);
+            });
+            catalogPage++;
+        };
 
+        loadCatalog();
+        
+        document.getElementById('load-more').addEventListener('click', loadCatalog);
+
+        document.getElementById('form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const description = document.getElementById('description').value;
+
+            await fetch('/api/form/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, phone, description })
+            });
+
+            alert('Заказ отправлен!');
+        });
+    });
+</script>
 
 </body>
 </html>
