@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from .models import Order
+from .models import Order, Cake
 
 
 class OrderSerializer(ModelSerializer):
@@ -9,4 +9,17 @@ class OrderSerializer(ModelSerializer):
             "name",
             "phone",
             "comment",
+        )
+
+
+class CakeSerializer(ModelSerializer):
+    class Meta:
+        model = Cake
+        fields = (
+            "name",
+            "image",
+            "description",
+            "price",
+            "weight",
+            "saled",
         )

@@ -2,119 +2,154 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Кондитерская</title>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
-            background-image: url('https://example.com/background.jpg'); /* Замените на URL вашего фона */
-            background-size: cover;
-            background-position: center;
+        * {
+            box-sizing: border-box; /* Устанавливаем box-sizing для всех элементов */
         }
-        header {
-            background: rgba(255, 107, 107, 0.8);
-            padding: 40px;
-            text-align: center;
-            color: white;
-            position: relative;
-            clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+        
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #f9f9f9; 
+            color: #333; 
+            background-image: url('https://example.com/background.jpg'); /* Замените на URL вашего фона */ 
+            background-size: cover; 
+            background-position: center; 
+            min-height: 100vh; /* Заставляем тело занимать всю высоту экрана */
         }
-        header h1 {
-            font-family: 'Pacifico', cursive;
-            font-size: 3em;
-            margin: 0;
+        
+        header { 
+            background: rgba(255, 107, 107, 0.8); 
+            padding: 40px; 
+            text-align: center; 
+            color: white; 
+            position: relative; 
+            clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%); 
         }
-        section {
-            padding: 60px 20px;
-            max-width: 800px;
-            margin: auto;
-            position: relative;
-            overflow: hidden;
-            background-color: rgba(255, 255, 255, 0.9); /* Полупрозрачный фон для секций */
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        
+        header h1 { 
+            font-family: 'Pacifico', cursive; 
+            font-size: 3em; 
+            margin: 0; 
         }
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 2.5em;
-            color: #333;
+        
+        section { 
+            padding: 60px 20px; 
+            max-width: 1200px; /* Увеличиваем максимальную ширину секции */
+            margin: auto; 
+            position: relative; 
+            overflow: hidden; 
+            background-color: rgba(255, 255, 255, 0.9); /* Полупрозрачный фон для секций */ 
+            border-radius: 12px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1); 
         }
-        h2::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: #ff6b6b;
-            margin: 10px auto;
-            border-radius: 2px;
+        
+        h2 { 
+            text-align: center; 
+            margin-bottom: 20px; 
+            font-size: 2.5em; 
+            color: #333; 
         }
-        .card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            margin: 15px;
-            padding: 20px;
-            transition: transform 0.3s, box-shadow 0.3s;
+        
+        h2::after { 
+            content: ''; 
+            display: block; 
+            width: 60px; 
+            height: 4px; 
+            background: #ff6b6b; 
+            margin: 10px auto; 
+            border-radius: 2px; 
         }
-        .card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        
+        .grid { 
+            display: flex; 
+            flex-wrap: wrap; /* Позволяет элементам переноситься на новую строку */ 
+            justify-content: space-between; /* Разделяет карточки по доступному пространству */ 
+            gap: 20px; /* Пробел между карточками */ 
         }
-        .grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+        
+        .card { 
+            flex: 1 1 calc(33% - 20px); /* Каждая карточка занимает примерно 1/3 ширины контейнера с учетом отступов */ 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Добавление тени для карточек */ 
+            border-radius: 8px; /* Скругление углов */ 
+            padding: 10px; /* Отступ внутри карточки */ 
+            background-color: #fff; /* Цвет фона карточки */ 
         }
-        .form-group {
-            margin-bottom: 20px;
+        
+        .card:hover { 
+            transform: scale(1.05); 
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2); 
         }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold; /* Сделаем текст метки жирным */
+        
+        .form-group { 
+            margin-bottom: 20px; 
         }
-        input, textarea {
-            width: calc(100% - 20px); /* Учитываем внутренние отступы */
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            transition: border-color 0.2s, box-shadow 0.2s;
-            font-family: 'Roboto', sans-serif; /* Стандартизируем шрифт */
+        
+        label { 
+            display: block; 
+            margin-bottom: 5px; 
+            font-weight: bold; /* Сделаем текст метки жирным */ 
         }
-        input:focus, textarea:focus {
-            border-color: #ff6b6b;
-            outline: none;
-            box-shadow: 0 0 5px rgba(255,107,107,0.5);
+        
+        input, textarea { 
+            width: calc(100% - 20px); /* Учитываем внутренние отступы */ 
+            padding: 10px; 
+            border-radius: 8px; 
+            border: 1px solid #ccc; 
+            transition: border-color 0.2s, box-shadow 0.2s; 
+            font-family: 'Roboto', sans-serif; /* Стандартизируем шрифт */ 
         }
-        button {
-            background-color: #ff6b6b;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        
+        input:focus, textarea:focus { 
+            border-color: #ff6b6b; 
+            outline: none; 
+            box-shadow: 0 0 5px rgba(255,107,107,0.5); 
         }
-        button:hover {
-            background-color: #ff3d3d;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        
+        button { 
+            background-color: #ff6b6b; 
+            color: white; 
+            border: none; 
+            padding: 10px 15px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; 
         }
-        footer {
-            background-color: #ff6b6b;
-            padding: 20px;
-            text-align: center;
-            color: white;
+        
+        button:hover { 
+            background-color: #ff3d3d; 
+            transform: translateY(-2px); 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
         }
-        footer a {
-            color: white;
+        
+        footer { 
+            background-color: #ff6b6b; 
+            padding: 20px; 
+            text-align: center; 
+            color: white; 
         }
+        
+        footer a { 
+            color: white; 
+        }
+        
+        /* Адаптивные стили */
+        @media (max-width: 768px) {
+            .card {
+                flex: 1 1 calc(50% - 20px); /* На маленьких экранах две карточки в ряд */
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .card {
+                flex: 1 1 calc(100% - 20px); /* На очень маленьких экранах одна карточка в ряд */
+            }
+        }        
     </style>
 </head>
 <body>
@@ -125,8 +160,7 @@
 
 <section id="about">
     <h2>О нас</h2>
-    <p>Мы предлагаем широкий ассортимент вкусных десертов, пригот
-овленных с любовью и заботой. Попробуйте наши новинки и не упустите возможность заказать свои любимые сладости!</p>
+    <p>Мы предлагаем широкий ассортимент вкусных десертов, приготовленных с любовью и заботой. Попробуйте наши новинки и не упустите возможность заказать свои любимые сладости!</p>
 </section>
 
 <section id="new-products">
@@ -152,85 +186,95 @@
             <input type="tel" id="phone" required>
         </div>
         <div class="form-group">
-            <label for="description">Описание заказа:</label>
-            <textarea id="description" rows="4"></textarea>
+            <label for="comment">Описание заказа:</label>
+            <textarea id="comment" rows="4"></textarea>
         </div>
         <button type="submit">Отправить заказ</button>
     </form>
 </section>
 
 <footer>
-    <p>Контакты: Телефон - +7 (123) 456-78-90</p>
-    <p><a href="#">Telegram</a> | <a href="#">Instagram</a></p>
-    <p>Адрес: г. Москва, ул. Примерная, д. 1</p>
+    <p>Контакты: +7 (906) 779-36-26</p>
+    <p><a href="https://t.me/olahermut">Telegram</a> | <a href="https://www.instagram.com/cakehermut?igsh=MWlxY2hkZTUxNWJ0Zw==">Instagram</a></p>
+    <p>Адрес: проспект Красной Армии, 251А, Сергиев Посад, Московская область, 141300</p>
 </footer>
 
-<script>
-    async function fetchProducts(url, elementId) {
-        const response = await fetch(url);
-        const products = await response.json();
-        
-        const grid = document.getElementById(elementId);
-        products.forEach(product => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `
-                <h3>${product.name}</h3>
-                <p>Вес: ${product.weight} г</p>
-                <p>Цена: ${product.price} ₽</p>
-                <p>${product.description}</p>
-                <img src="${product.image}" alt="${product.name}" style="width:100%; border-radius:8px; margin-top:10px;">
-            `;
-            grid.appendChild(card);
-        });
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        fetchProducts('/api/hots', 'new-products-grid');
-        
-        let catalogPage = 0;
-        const loadCatalog = async () => {
-            const response = await fetch(`/api/catalog?page=${catalogPage}`);
-            const products = await response.json();
-            
-            const grid = document.getElementById('catalog-grid');
-            products.forEach(product => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <h3>${product.name}</h3>
-                    <p>Вес: ${product.weight} г</p>
-                    <p>Цена: ${product.price} ₽</p>
-                    <p>${product.description}</p>
-                    <img src="${product.image}" alt="${product.name}" style="width:100%; border-radius:8px; margin-top:10px;">
-                `;
-                grid.appendChild(card);
-            });
-            catalogPage++;
-        };
-
-        loadCatalog();
-        
-        document.getElementById('load-more').addEventListener('click', loadCatalog);
-
-        document.getElementById('form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const description = document.getElementById('description').value;
-
-            await fetch('/api/form/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ name, phone, description })
-            });
-
-            alert('Заказ отправлен!');
-        });
-    });
+<script> 
+    async function fetchProducts(url, elementId) { 
+        const response = await fetch(url); 
+        const products = await response.json(); 
+         
+        const grid = document.getElementById(elementId); 
+        products.forEach(product => { 
+            const card = document.createElement('div'); 
+            card.className = 'card'; 
+            card.innerHTML = ` 
+                <h3>${product.name}</h3> 
+                <p>Вес: ${product.weight} г</p> 
+                <p>Цена: ${product.price} ₽</p> 
+                <p>${product.description}</p> 
+                <img src="${product.image}" alt="${product.name}" style="width:100%; border-radius:8px; margin-top:10px;"> 
+            `; 
+            grid.appendChild(card); 
+        }); 
+    } 
+ 
+    document.addEventListener('DOMContentLoaded', () => {  
+        fetchProducts('/api/hots/', 'new-products-grid');  
+     
+        let catalogPage = 1;  
+        const loadCatalog = async () => {  
+            const response = await fetch(`/api/catalog/?page=${catalogPage}`); // Добавлены кавычки для URL
+            const data = await response.json(); // Изменено на data для ясности 
+     
+            const grid = document.getElementById('catalog-grid');  
+            data.results.forEach(product => { // Обратите внимание на использование data.results 
+                const card = document.createElement('div');  
+                card.className = 'card';  
+                card.innerHTML = `  
+                    <h3>${product.name}</h3>  
+                    <p>Вес: ${product.weight} г</p>  
+                    <p>Цена: ${product.price} ₽</p>  
+                    <p>${product.description}</p>  
+                    <img src="${product.image}" alt="${product.name}" style="width:100%; border-radius:8px; margin-top:10px;">  
+                `;  
+                grid.appendChild(card);  
+            }); 
+     
+            // Проверка на наличие следующей страницы 
+            if (data.next) { 
+                catalogPage++;  
+            } else { 
+                document.getElementById('load-more').style.display = 'none'; // Скрыть кнопку, если больше страниц нет 
+            } 
+        };  
+     
+        loadCatalog();  
+     
+        document.getElementById('load-more').addEventListener('click', loadCatalog); 
+ 
+        document.getElementById('form').addEventListener('submit', async (e) => {  
+            e.preventDefault();  
+         
+            const name = document.getElementById('name').value;  
+            const phone = document.getElementById('phone').value;  
+            const comment = document.getElementById('comment').value;  
+         
+            // Получаем CSRF-токен из мета-тега 
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content'); 
+         
+            await fetch('/api/form/', {  
+                method: 'POST',  
+                headers: {  
+                    'Content-Type': 'application/json', 
+                    'X-CSRFToken': csrfToken // Добавляем CSRF-токен в заголовки 
+                },  
+                body: JSON.stringify({ name, phone, comment })  
+            });          
+ 
+            alert('Заказ отправлен!'); 
+        }); 
+    }); 
 </script>
 
 </body>
