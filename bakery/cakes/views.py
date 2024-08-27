@@ -5,6 +5,7 @@ from rest_framework.mixins import CreateModelMixin
 from .serializers import CakeSerializer, OrderSerializer
 from rest_framework.status import HTTP_201_CREATED
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .models import Order, Cake
 from .pagination import CustomPagination
 
@@ -26,6 +27,7 @@ class OrderView(ModelViewSet, CreateModelMixin):
 
 class BaseCatalogView(ModelViewSet):
     serializer_class = CakeSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
 class CatalogView(BaseCatalogView):
