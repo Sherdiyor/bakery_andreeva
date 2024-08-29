@@ -5,7 +5,7 @@ from rest_framework.mixins import CreateModelMixin
 from .serializers import CakeSerializer, OrderSerializer
 from rest_framework.status import HTTP_201_CREATED
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from .models import Order, Cake
 from .pagination import CustomPagination
 
@@ -17,6 +17,7 @@ class HomePageView(TemplateView, ListCreateAPIView):
 class OrderView(ModelViewSet, CreateModelMixin):
     serializer_class = OrderSerializer
     queryset = Order.objects.all()
+    permission_classes = [IsAuthenticated]
 
     def create(self, request):
         serializer = self.get_serializer(data=request.data)
