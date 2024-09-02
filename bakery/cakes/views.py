@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from .models import Order, Cake
 from .pagination import CustomPagination
+from .permissions import CustomPermission
 
 
 class HomePageView(TemplateView, ListCreateAPIView):
@@ -17,7 +18,7 @@ class HomePageView(TemplateView, ListCreateAPIView):
 class OrderView(ModelViewSet, CreateModelMixin):
     serializer_class = OrderSerializer
     queryset = Order.objects.all()
-    permission_classes = [IsAuthenticated]
+    permission_classes = [CustomPermission]
 
     def create(self, request):
         serializer = self.get_serializer(data=request.data)
