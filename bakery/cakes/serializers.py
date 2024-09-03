@@ -6,6 +6,7 @@ class OrderSerializer(ModelSerializer):
     class Meta:
         model = Order
         fields = (
+            "id",
             "name",
             "phone",
             "comment",
