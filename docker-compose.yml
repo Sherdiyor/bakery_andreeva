@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=mydatabase
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+
+  web:
+    build:
+      context: .
+      dockerfile: ./bakery/Dockerfile
+    env_file:
+      - ./bakery/.env
+    command: |
+      bash -c "gunicorn bakery.wsgi:application --bind 0:8000"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+volumes:
+  pg-data:

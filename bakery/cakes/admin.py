@@ -8,7 +8,7 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = [
         'name',
         'phone',
-        'text',
+        'comment',
     ]
     search_fields = [
         'name',
