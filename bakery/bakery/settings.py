@@ -1,18 +1,16 @@
 import os
 from pathlib import Path
 
-from datetime import timedelta
-
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-=zy14l4f5^n+ki_9-vfi+)$d#$#)noaqtzhpi=6^b^a^z!y*s%'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
-DEBUG = True
+DEBUG = bool(os.getenv('DEBUG'))
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', default=['*'])
 
 
 INSTALLED_APPS = [
@@ -64,21 +62,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'bakery.wsgi.application'
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': os.getenv('ENGINE', default='django.db.backends.postgresql'),
-#         'NAME': os.getenv('NAME', default='mydatabase'),
-#         'USER': os.getenv('USER', default='myuser'),
-#         'PASSWORD': os.getenv('PASSWORD', default='mypassword'),
-#         'HOST': os.getenv('HOST', default='db'),
-#         'PORT': os.getenv('PORT', default=5432),
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': os.getenv('ENGINE', default='django.db.backends.postgresql'),
+        'NAME': os.getenv('NAME', default='mydatabase'),
+        'USER': os.getenv('USER', default='myuser'),
+        'PASSWORD': os.getenv('PASSWORD', default='mypassword'),
+        'HOST': os.getenv('HOST', default='db'),
+        'PORT': os.getenv('PORT', default=5432),
     }
 }
 
@@ -117,17 +108,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-
-    # 'DEFAULT_AUTHENTICATION_CLASSES': [
-    #     'rest_framework_simplejwt.authentication.JWTAuthentication',
-    # ],
-
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ]
 }
-
-# SIMPLE_JWT = {
-#     'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
-#     'AUTH_HEADER_TYPES': ('Bearer',),
-# }
