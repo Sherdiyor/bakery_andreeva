@@ -62,14 +62,21 @@ TEMPLATES = [
 WSGI_APPLICATION = 'bakery.wsgi.application'
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': os.getenv('ENGINE', default='django.db.backends.postgresql'),
+#         'NAME': os.getenv('NAME', default='mydatabase'),
+#         'USER': os.getenv('USER', default='myuser'),
+#         'PASSWORD': os.getenv('PASSWORD', default='mypassword'),
+#         'HOST': os.getenv('HOST', default='db'),
+#         'PORT': os.getenv('PORT', default=5432),
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv('ENGINE', default='django.db.backends.postgresql'),
-        'NAME': os.getenv('NAME', default='mydatabase'),
-        'USER': os.getenv('USER', default='myuser'),
-        'PASSWORD': os.getenv('PASSWORD', default='mypassword'),
-        'HOST': os.getenv('HOST', default='db'),
-        'PORT': os.getenv('PORT', default=5432),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
