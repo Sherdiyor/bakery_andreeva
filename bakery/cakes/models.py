@@ -34,3 +34,6 @@ class Cake(models.Model):
     saled = models.BooleanField(
         blank=False, default=False, help_text='продан'
     )
+
+    class Meta:
+        ordering = ['-id']
