@@ -17,5 +17,4 @@ api_routes = [
     path('api/swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger'),
 ]
 
-if DEBUG is True:
-    urlpatterns + api_routes
+urlpatterns + api_routes

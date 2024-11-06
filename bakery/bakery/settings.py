@@ -42,6 +42,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'bakery.urls'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 TEMPLATES = [
     {
@@ -106,10 +109,10 @@ USE_TZ = True
 
 
 STATIC_URL = "/static/"
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
 
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join('/var/www/html/media/')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
