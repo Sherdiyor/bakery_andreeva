@@ -37,3 +37,18 @@ class Cake(models.Model):
 
     class Meta:
         ordering = ['-id']
+
+
+class Contacts(models.Model):
+    tel = models.CharField(
+        max_length=20, null=False, blank=False, help_text='номер телефона'
+    )
+    telegram = models.CharField(
+        max_length=50, null=False, blank=False, help_text='ссылка на телеграм'
+    )
+    instagram = models.CharField(
+        max_length=50, null=False, blank=False, help_text='ссылка на инстаграм'
+    )
+    address = models.CharField(
+        max_length=150, null=False, blank=False, help_text='адрес'
+    )

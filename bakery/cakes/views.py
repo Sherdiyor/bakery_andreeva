@@ -5,14 +5,19 @@ from rest_framework.mixins import CreateModelMixin
 from .serializers import CakeSerializer, OrderSerializer
 from rest_framework.status import HTTP_201_CREATED
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
-from .models import Order, Cake
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from .models import Order, Cake, Contacts
 from .pagination import CustomPagination
 from .permissions import CustomPermission
 
 
 class HomePageView(TemplateView, ListCreateAPIView):
     template_name = "index.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(HomePageView, self).get_context_data(**kwargs)
+        context['contacts'] = Contacts.objects.get(id=1)
+        return context
 
 
 class OrderView(ModelViewSet, CreateModelMixin):

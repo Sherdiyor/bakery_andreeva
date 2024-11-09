@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Order, Cake
+from .models import Order, Cake, Contacts
 
 
 @admin.register(Order)
@@ -25,4 +25,14 @@ class CakeAdmin(admin.ModelAdmin):
     ]
     search_fields = [
         'name',
+    ]
+
+
+@admin.register(Contacts)
+class ContactsAdmin(admin.ModelAdmin):
+    list_display = [
+        'tel',
+        'telegram',
+        'instagram',
+        'address'
     ]
